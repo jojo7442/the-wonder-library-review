@@ -4,434 +4,765 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Wonder Library | تقييم تجربتك</title>
-
+<meta name="theme-color" content="#071a2b">
+<title>تقييم تجربتك | The Wonder Library</title>
 <style>
-:root {
+:root{
   --navy:#071a2b;
   --blue:#102b43;
-  --gold:#e6bd70;
+  --gold:#dfb86e;
   --cream:#fff8e9;
-  --line:#977545;
+  --muted:#b9c5d0;
 }
-* {box-sizing:border-box}
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
+  min-height:100vh;
   font-family:Tahoma,Arial,sans-serif;
   color:var(--cream);
   background:
-    radial-gradient(circle at 20% 10%,#234b68 0%,transparent 35%),
-    linear-gradient(140deg,#061321,#102b43);
-  min-height:100vh;
+    radial-gradient(circle at 20% 0%,#254c67,transparent 40%),
+    linear-gradient(140deg,#061421,#102b43);
 }
-body::before {
+body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.35;
-  background-image:radial-gradient(#e6bd70 1px,transparent 1px);
-  background-size:65px 65px;
+  opacity:.23;
+  background-image:radial-gradient(#dfb86e 1px,transparent 1px);
+  background-size:67px 67px;
 }
-.container {
-  max-width:1100px;
+.wrap{
+  max-width:1120px;
   margin:auto;
-  padding:25px 18px;
+  padding:22px;
   position:relative;
 }
-header {
-  text-align:center;
-  padding:30px 0;
+header{text-align:center;margin:15px 0 25px}
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--gold);
+  box-shadow:0 0 30px #dfb86e55;
 }
-.brand {
-  font: bold clamp(25px,4vw,39px) Georgia,serif;
+.brand{
   color:var(--gold);
-  text-shadow:0 0 22px #e6bd7055;
+  font:bold clamp(24px,4vw,36px) Georgia,serif;
+  margin:12px 0;
+  direction:ltr;
 }
-.subtitle {
-  color:var(--gold);
-  letter-spacing:3px;
-  margin-top:12px;
-}
-h1 {text-align:center;color:var(--gold)}
-.intro {
+.tagline{color:#ead3a7;letter-spacing:3px}
+h1{text-align:center;color:var(--gold)}
+.intro{
   text-align:center;
   line-height:2;
+  color:#d0d9e2;
   margin-bottom:30px;
 }
-.layout {
+.layout{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:25px;
+  gap:24px;
   align-items:start;
 }
-.panel {
-  background:#091f33ed;
-  border:1px solid var(--line);
+.panel{
+  background:#0b2135f5;
+  border:1px solid #ad8956;
   border-radius:22px;
-  padding:25px;
-  box-shadow:0 15px 40px #0005;
+  padding:24px;
+  box-shadow:0 20px 40px #0005;
 }
-.panel h2 {color:var(--gold);margin-top:0}
-.field {margin:20px 0}
-label {
+.panel h2{color:var(--gold);margin-top:0}
+.field{margin:20px 0}
+.field label,.field-title{
   display:block;
-  margin-bottom:10px;
   font-weight:bold;
+  margin-bottom:10px;
 }
-input[type=text],textarea {
+.optional,.hint{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:normal;
+}
+input[type=text],textarea{
   width:100%;
   padding:14px;
-  border:1px solid #9d8055;
-  border-radius:12px;
   background:#fffaf0;
-  color:#172b3b;
+  color:#182c3d;
+  border:1px solid #b8a07b;
+  border-radius:12px;
   font:inherit;
   outline:none;
 }
-input:focus,textarea:focus {
+input:focus,textarea:focus{
   border-color:var(--gold);
-  box-shadow:0 0 0 3px #e6bd7033;
+  box-shadow:0 0 0 3px #dfb86e40;
 }
-textarea {
+textarea{
   min-height:120px;
   resize:vertical;
-  line-height:1.8;
+  line-height:1.9;
 }
-.ratings {
+.levels{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
 }
-.rating {
-  text-align:center;
-  border:1px solid #997745;
-  border-radius:12px;
-  padding:10px 3px;
+.level{
+  display:block;
   cursor:pointer;
+  border:1px solid #99784a;
+  border-radius:12px;
+  padding:11px 4px;
+  text-align:center;
   font-size:12px;
   transition:.2s;
 }
-.rating:hover {transform:translateY(-3px)}
-.rating input {position:absolute;opacity:0}
-.rating .stars {
+.level:hover{transform:translateY(-3px)}
+.level input{
+  position:absolute;
+  opacity:0;
+}
+.stars{
   display:block;
   color:var(--gold);
   direction:ltr;
-  margin-bottom:7px;
+  font-size:14px;
+  margin-bottom:8px;
 }
-.rating:has(input:checked) {
+.level:has(input:checked){
   background:var(--gold);
   color:var(--navy);
 }
-.rating:has(input:checked) .stars {color:var(--navy)}
-button,.social {
-  display:block;
-  width:100%;
-  padding:14px;
-  margin-top:12px;
+.level:has(input:checked) .stars{color:var(--navy)}
+button{
   border:1px solid var(--gold);
   border-radius:12px;
-  background:linear-gradient(110deg,#e8c783,#bb8c43);
-  color:var(--navy);
-  font: bold 14px Tahoma,Arial,sans-serif;
+  padding:14px;
+  font:bold 14px Tahoma,Arial,sans-serif;
   cursor:pointer;
-  text-align:center;
-  text-decoration:none;
   transition:.2s;
 }
-button:hover,.social:hover {
+button:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 20px #e6bd7040;
+  box-shadow:0 8px 22px #dfb86e35;
 }
-.secondary {
-  background:transparent;
+.main-btn{
+  background:linear-gradient(115deg,#f0d293,#bf9149);
+  color:var(--navy);
+  width:100%;
+}
+.alt-btn{
+  background:#102e44;
   color:var(--gold);
+  flex:1;
+  min-width:140px;
 }
-#card {
-  background:linear-gradient(150deg,#fffaf0,#e9d6ad);
-  border:4px double #ba914f;
-  border-radius:18px;
-  padding:30px 20px;
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:14px;
+}
+.preview{position:sticky;top:18px}
+#card{
+  width:100%;
+  aspect-ratio:4/5;
   min-height:470px;
+  background:linear-gradient(145deg,#fffaf0,#efdfbc);
+  color:#122b3e;
+  border:4px double #b99253;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
   text-align:center;
-  color:#132b40;
+  padding:18px;
+  overflow:hidden;
 }
-#card h2 {
-  color:#8b6229;
-  font: bold 25px Georgia,serif;
+.card-logo{
+  width:66px;
+  height:66px;
+  object-fit:cover;
+  border-radius:50%;
+  border:1px solid #a87d3f;
 }
-#card h3 {color:#876029}
-#cardStars {
-  font-size:29px;
-  color:#b88b3c;
+.card-brand{
+  font:bold 18px Georgia,serif;
+  color:#19354b;
+  margin:8px 0 4px;
+}
+.card-tag{
+  font-size:10px;
+  color:#956e32;
+  letter-spacing:2px;
+}
+.card-title{
+  color:#8b652f;
+  font-size:24px;
+  margin:20px 0 12px;
+}
+.review-box{
+  border:1px solid #cfb58a;
+  background:#fffaf3d9;
+  border-radius:16px;
+  padding:14px 10px;
+  width:100%;
+  overflow:hidden;
+}
+.review-name{
+  font-weight:bold;
+  overflow-wrap:anywhere;
+}
+.review-stars{
   direction:ltr;
-  margin:20px 0;
+  font-size:23px;
+  color:#b78a3c;
+  letter-spacing:2px;
+  margin:10px 0;
 }
-#cardComment {
+.review-level{
+  display:inline-block;
+  border-radius:99px;
+  background:#f0dfc1;
+  color:#795528;
+  padding:6px 12px;
+  font-size:12px;
+}
+.review-comment{
+  line-height:1.8;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
-  line-height:2;
+  font-size:13px;
+  max-height:125px;
+  overflow:auto;
 }
-#cardName {font-weight:bold}
-.card-decoration {
-  font-size:35px;
-  color:#ae813e;
+.thanks{
+  font-size:15px;
+  color:#80602d;
+  font-weight:bold;
+  margin-top:auto;
+  padding-top:12px;
 }
-.small {
+.contact{
+  font-size:11px;
+  color:#23435c;
+  direction:ltr;
+  margin-top:8px;
+}
+.notice{
+  background:#193448;
+  border-radius:12px;
+  padding:12px;
   font-size:12px;
+  line-height:1.9;
+  color:#d6e0e7;
+  margin-top:17px;
+}
+.status{
+  font-size:12px;
+  color:#e9d2a2;
   line-height:1.8;
-  color:#cdbb96;
-}
-footer {
+  min-height:24px;
   text-align:center;
-  padding:35px 0;
-  color:var(--gold);
 }
-@media(max-width:760px) {
-  .layout {grid-template-columns:1fr}
-  .panel {padding:18px}
+footer{
+  text-align:center;
+  color:#c6a771;
+  margin:35px 0 10px;
 }
-@media(max-width:390px) {
-  .ratings {grid-template-columns:repeat(3,1fr)}
+a{color:var(--gold)}
+@media(max-width:780px){
+  .layout{grid-template-columns:1fr}
+  .preview{position:static}
+  .panel{padding:18px}
+  .wrap{padding:15px}
+}
+@media(max-width:390px){
+  .levels{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
-
 <body>
-<div class="container">
+<div class="wrap">
 
 <header>
-  <div class="brand">✦ THE WONDER LIBRARY ✦</div>
-  <p class="subtitle">LEARN ✦ PLAN ✦ GROW</p>
+  <img class="logo" src="logo.png" alt="شعار المكتبة">
+  <div class="brand">THE WONDER LIBRARY</div>
+  <div class="tagline">LEARN · PLAN · GROW</div>
 </header>
 
 <h1>شاركنا رأيك ✨</h1>
 <p class="intro">
-  رأيك يضيء لنا طريق التطوير.<br>
-  شاركنا تجربتك مع مكتبة العجائب.
+  تجربتك في مكتبة العجائب تهمّنا.<br>
+  ملاحظاتك تساعدنا على التطور وتقديم الأفضل.
 </p>
 
 <main class="layout">
 
 <section class="panel">
-  <h2>✦ تقييم تجربتك</h2>
+<h2>✦ تقييم تجربتك</h2>
 
-  <form id="reviewForm">
-    <div class="field">
-      <label for="name">الاسم (اختياري)</label>
-      <input id="name" type="text" maxlength="50"
-        placeholder="اكتب اسمك أو اتركه فارغًا">
-    </div>
+<form id="reviewForm">
+<div class="field">
+  <label for="name">الاسم <span class="optional">(اختياري)</span></label>
+  <input id="name" type="text" maxlength="50"
+         placeholder="اكتب اسمك أو اتركه فارغًا">
+</div>
 
-    <div class="field">
-      <label>كيف تقيّم تجربتك؟</label>
-      <div class="ratings">
-        <label class="rating">
-          <input type="radio" name="rating" value="1">
-          <span class="stars">★</span>ضعيف
-        </label>
-        <label class="rating">
-          <input type="radio" name="rating" value="2">
-          <span class="stars">★★</span>مقبول
-        </label>
-        <label class="rating">
-          <input type="radio" name="rating" value="3">
-          <span class="stars">★★★</span>جيد
-        </label>
-        <label class="rating">
-          <input type="radio" name="rating" value="4">
-          <span class="stars">★★★★</span>ممتاز
-        </label>
-        <label class="rating">
-          <input type="radio" name="rating" value="5" checked>
-          <span class="stars">★★★★★</span>رائع
-        </label>
-      </div>
-    </div>
+<div class="field">
+  <span class="field-title">مستوى تجربتك</span>
+  <div class="levels">
+    <label class="level">
+      <input type="radio" name="rating" value="1">
+      <span class="stars">★</span>ضعيف
+    </label>
+    <label class="level">
+      <input type="radio" name="rating" value="2">
+      <span class="stars">★★</span>مقبول
+    </label>
+    <label class="level">
+      <input type="radio" name="rating" value="3">
+      <span class="stars">★★★</span>جيد
+    </label>
+    <label class="level">
+      <input type="radio" name="rating" value="4">
+      <span class="stars">★★★★</span>ممتاز
+    </label>
+    <label class="level">
+      <input type="radio" name="rating" value="5" checked>
+      <span class="stars">★★★★★</span>رائع
+    </label>
+  </div>
+</div>
 
-    <div class="field">
-      <label for="comment">التعليقات والملاحظات</label>
-      <textarea id="comment" maxlength="500"
-        placeholder="اكتب ملاحظاتك واقتراحاتك هنا..."></textarea>
-      <p class="small">
-        <span id="count">0</span> / 500 حرف
-      </p>
-    </div>
+<div class="field">
+  <label for="comment">التعليقات والملاحظات</label>
+  <textarea id="comment" maxlength="500"
+    placeholder="شاركنا رأيك أو اقتراحاتك..."></textarea>
+  <div class="hint">
+    <span id="count">0</span> / 500 حرف
+  </div>
+</div>
 
-    <button type="submit">✦ إنشاء بطاقة التقييم</button>
-  </form>
+<button class="main-btn" type="submit">
+  ✦ إنشاء بطاقة التقييم
+</button>
+</form>
+
+<div class="notice">
+  يمكنك مشاركة صورة البطاقة عبر خيارات المشاركة
+  المدعومة في جهازك. إذا لم تكن المشاركة المباشرة
+  متاحة، ستُنزّل الصورة لرفعها يدويًا إلى واتساب.
+  لن يُرسل أي تقييم دون موافقتك.
+</div>
 </section>
 
-<section class="panel">
-  <h2>✦ معاينة بطاقة المشاركة</h2>
+<section class="panel preview">
+<h2>✦ معاينة بطاقة المشاركة</h2>
 
-  <div id="card">
-    <div class="card-decoration">✦ 📖 ✦</div>
-    <h2>THE WONDER LIBRARY</h2>
-    <p>LEARN ✦ PLAN ✦ GROW</p>
-    <hr>
-    <h3>تجربتك مع مكتبتنا</h3>
-    <div id="cardStars">★★★★★</div>
-    <p id="cardLevel">رائع</p>
-    <p id="cardName">زائر مكتبة العجائب</p>
-    <p id="cardComment">تظهر ملاحظاتك هنا</p>
-    <hr>
-    <h3>شكرًا لمشاركتك ✨</h3>
-    <p>TikTok: J0_7H</p>
+<div id="card">
+  <img class="card-logo" src="logo.png" alt="شعار المكتبة">
+  <div class="card-brand">THE WONDER LIBRARY</div>
+  <div class="card-tag">LEARN · PLAN · GROW</div>
+  <div class="card-title">آراء مجتمع المكتبة</div>
+
+  <div class="review-box">
+    <div id="outName" class="review-name">
+      زائر مكتبة العجائب
+    </div>
+    <div id="outStars" class="review-stars">★★★★★</div>
+    <div id="outLevel" class="review-level">
+      رائع · 5 نجوم
+    </div>
+    <div id="outComment" class="review-comment">
+      تظهر ملاحظاتك هنا بعد إنشاء البطاقة.
+    </div>
   </div>
 
-  <button id="download" class="secondary">
-    تنزيل صورة التقييم PNG
-  </button>
-  <button id="share">
-    مشاركة صورة التقييم
-  </button>
-  <button id="whatsapp" class="secondary">
-    إرسال التقييم عبر واتساب
-  </button>
+  <div class="thanks">شكرًا لمشاركتك ✨</div>
+  <div class="contact">TikTok: @J0_7H</div>
+  <div class="contact">THE WONDER LIBRARY</div>
+</div>
 
-  <a class="social secondary"
-     href="https://www.tiktok.com/@J0_7H"
-     target="_blank" rel="noopener">
-    TikTok | J0_7H
+<div class="actions">
+  <button id="downloadBtn" class="alt-btn" type="button">
+    تنزيل PNG
+  </button>
+  <button id="shareBtn" class="alt-btn" type="button">
+    مشاركة الصورة
+  </button>
+  <button id="whatsappBtn" class="main-btn" type="button">
+    إرسال عبر واتساب
+  </button>
+</div>
+
+<p id="status" class="status" role="status" aria-live="polite"></p>
+
+<p style="text-align:center">
+  <a href="https://www.tiktok.com/@J0_7H"
+     target="_blank" rel="noopener noreferrer">
+    TikTok · J0_7H
   </a>
-
-  <p id="status" class="small" role="status"></p>
+</p>
 </section>
 
 </main>
-
-<footer>✦ The Wonder Library ✦</footer>
+<footer>✦ THE WONDER LIBRARY ✦</footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
 <script>
-const phone = "966544880891";
-const form = document.getElementById("reviewForm");
-const comment = document.getElementById("comment");
-const statusBox = document.getElementById("status");
-const levels = ["","ضعيف","مقبول","جيد","ممتاز","رائع"];
+"use strict";
 
-comment.addEventListener("input", () => {
+const form = document.getElementById("reviewForm");
+const nameInput = document.getElementById("name");
+const commentInput = document.getElementById("comment");
+const statusEl = document.getElementById("status");
+const phone = "966596240060";
+
+const labels = {
+  1:"ضعيف",
+  2:"مقبول",
+  3:"جيد",
+  4:"ممتاز",
+  5:"رائع"
+};
+
+commentInput.addEventListener("input", () => {
   document.getElementById("count").textContent =
-    comment.value.length;
+    commentInput.value.length;
 });
 
-function updateCard() {
-  const name = document.getElementById("name").value.trim();
+function details() {
   const rating = Number(
-    document.querySelector('input[name="rating"]:checked').value
+    new FormData(form).get("rating") || 5
   );
+  return {
+    rating,
+    name:nameInput.value.trim() || "زائر مكتبة العجائب",
+    comment:commentInput.value.trim() ||
+      "شكرًا لمشاركتك تقييمك.",
+    level:labels[rating]
+  };
+}
 
-  document.getElementById("cardName").textContent =
-    name || "زائر مكتبة العجائب";
-
-  document.getElementById("cardStars").textContent =
-    "★".repeat(rating) + "☆".repeat(5-rating);
-
-  document.getElementById("cardLevel").textContent =
-    levels[rating];
-
-  document.getElementById("cardComment").textContent =
-    comment.value.trim() || "شكرًا لمشاركتك تقييمك";
+function updateCard() {
+  const d = details();
+  document.getElementById("outName").textContent = d.name;
+  document.getElementById("outStars").textContent =
+    "★".repeat(d.rating) + "☆".repeat(5-d.rating);
+  document.getElementById("outLevel").textContent =
+    d.level + " · " + d.rating + "/5";
+  document.getElementById("outComment").textContent = d.comment;
 }
 
 form.addEventListener("submit", e => {
   e.preventDefault();
   updateCard();
-  statusBox.textContent = "تم إنشاء بطاقة التقييم.";
+  statusEl.textContent = "تم تحديث بطاقة التقييم.";
 });
 
-async function createImage() {
-  if (typeof html2canvas === "undefined") {
-    throw new Error("تعذر تحميل مكتبة إنشاء الصور.");
+function roundedRect(ctx,x,y,w,h,r,fill,stroke) {
+  ctx.beginPath();
+  ctx.roundRect(x,y,w,h,r);
+  if(fill) {
+    ctx.fillStyle = fill;
+    ctx.fill();
   }
+  if(stroke) {
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
 
-  updateCard();
-  const canvas = await html2canvas(
-    document.getElementById("card"),
-    {scale:2,backgroundColor:"#fffaf0"}
-  );
+function linesFor(ctx,text,maxWidth) {
+  const result = [];
+  for(const para of text.split(/\r?\n/)) {
+    let line = "";
+    for(const word of para.split(/\s+/)) {
+      if(!word) continue;
+      const attempt = line ? line+" "+word : word;
+      if(ctx.measureText(attempt).width <= maxWidth) {
+        line = attempt;
+      } else {
+        if(line) result.push(line);
+        line = "";
+        for(const char of word) {
+          if(ctx.measureText(line+char).width > maxWidth && line) {
+            result.push(line);
+            line = "";
+          }
+          line += char;
+        }
+      }
+    }
+    result.push(line || " ");
+  }
+  return result;
+}
 
-  return new Promise((resolve,reject) => {
-    canvas.toBlob(blob => {
-      if (blob) resolve(blob);
-      else reject(new Error("تعذر إنشاء الصورة."));
-    }, "image/png");
+function wrapText(ctx,text,x,y,maxWidth,lineHeight,maxLines) {
+  const lines = linesFor(ctx,text,maxWidth);
+  const shown = lines.slice(0,maxLines);
+  if(lines.length > maxLines) {
+    shown[maxLines-1] = shown[maxLines-1].slice(0,-2) + "…";
+  }
+  shown.forEach((line,i) => {
+    ctx.fillText(line,x,y+i*lineHeight);
   });
 }
 
-function downloadBlob(blob) {
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "Wonder-Library-Review.png";
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url),1000);
+function loadLogo() {
+  return new Promise((resolve,reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(
+      new Error("تعذر تحميل logo.png. ارفعه بجانب index.html")
+    );
+    image.src = "logo.png";
+  });
 }
 
-document.getElementById("download").onclick = async () => {
-  try {
-    downloadBlob(await createImage());
-    statusBox.textContent = "تم تجهيز الصورة للتنزيل.";
-  } catch(err) {
-    statusBox.textContent = err.message;
-  }
-};
+async function makeBlob() {
+  updateCard();
+  const d = details();
+  const logo = await loadLogo();
+  await document.fonts.ready;
 
-document.getElementById("share").onclick = async () => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1000;
+  canvas.height = 1250;
+  const ctx = canvas.getContext("2d");
+
+  const bg = ctx.createLinearGradient(0,0,1000,1250);
+  bg.addColorStop(0,"#fffaf0");
+  bg.addColorStop(1,"#e9d5aa");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,1000,1250);
+
+  roundedRect(ctx,28,28,944,1194,25,null,"#b78c47");
+  roundedRect(ctx,42,42,916,1166,20,null,"#d1b47b");
+
+  // رسم الشعار داخل دائرة
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(500,151,77,0,Math.PI*2);
+  ctx.clip();
+
+  const size = Math.min(logo.naturalWidth,logo.naturalHeight);
+  ctx.drawImage(
+    logo,
+    (logo.naturalWidth-size)/2,
+    (logo.naturalHeight-size)/2,
+    size,size,
+    423,74,154,154
+  );
+  ctx.restore();
+
+  ctx.strokeStyle = "#b78c47";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(500,151,78,0,Math.PI*2);
+  ctx.stroke();
+
+  ctx.textAlign = "center";
+  ctx.direction = "ltr";
+  ctx.fillStyle = "#17334a";
+  ctx.font = "bold 34px Georgia,serif";
+  ctx.fillText("THE WONDER LIBRARY",500,280);
+
+  ctx.fillStyle = "#997037";
+  ctx.font = "20px Arial";
+  ctx.fillText("LEARN · PLAN · GROW",500,320);
+
+  ctx.direction = "rtl";
+  ctx.fillStyle = "#80602f";
+  ctx.font = "bold 44px Tahoma,Arial,sans-serif";
+  ctx.fillText("آراء مجتمع المكتبة",500,408);
+
+  ctx.fillStyle = "#987d53";
+  ctx.font = "24px Tahoma,Arial,sans-serif";
+  ctx.fillText("تجربتك تهمّنا",500,451);
+
+  roundedRect(
+    ctx,85,495,830,475,25,
+    "#fffaf2","#d3b68c"
+  );
+
+  ctx.fillStyle = "#17334a";
+  ctx.font = "bold 30px Tahoma,Arial,sans-serif";
+  wrapText(ctx,d.name,500,554,740,38,2);
+
+  ctx.direction = "ltr";
+  ctx.fillStyle = "#b58a3f";
+  ctx.font = "48px Arial";
+  ctx.fillText(
+    "★".repeat(d.rating)+"☆".repeat(5-d.rating),
+    500,660
+  );
+
+  ctx.direction = "rtl";
+  roundedRect(ctx,360,682,280,50,24,"#f0dfbd");
+
+  ctx.fillStyle = "#815a29";
+  ctx.font = "22px Tahoma,Arial,sans-serif";
+  ctx.fillText(
+    d.level+" · "+d.rating+"/5",
+    500,715
+  );
+
+  // تقليل حجم الخط عند طول التعليق
+  let fontSize = 25;
+  for(;fontSize>=18;fontSize--) {
+    ctx.font = fontSize+"px Tahoma,Arial,sans-serif";
+    if(linesFor(ctx,d.comment,730).length<=7) break;
+  }
+
+  ctx.fillStyle = "#273a48";
+  ctx.font = fontSize+"px Tahoma,Arial,sans-serif";
+  wrapText(ctx,d.comment,500,783,730,42,7);
+
+  ctx.fillStyle = "#85602c";
+  ctx.font = "bold 31px Tahoma,Arial,sans-serif";
+  ctx.fillText("شكرًا لمشاركتك ✨",500,1040);
+
+  ctx.direction = "ltr";
+  ctx.fillStyle = "#17334a";
+  ctx.font = "24px Arial";
+  ctx.fillText("TikTok: @J0_7H",500,1094);
+
+  ctx.font = "19px Georgia,serif";
+  ctx.fillText("THE WONDER LIBRARY",500,1140);
+
+  return new Promise((resolve,reject) => {
+    canvas.toBlob(blob => {
+      if(blob) resolve(blob);
+      else reject(new Error("تعذر إنشاء PNG"));
+    },"image/png");
+  });
+}
+
+function download(blob) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Wonder-Library-Review.png";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url),2000);
+}
+
+function message() {
+  const d = details();
+  return (
+    "تقييم The Wonder Library\n" +
+    "الاسم: " + d.name + "\n" +
+    "مستوى التجربة: " + d.level +
+    " (" + d.rating + "/5 نجوم)\n" +
+    "التعليقات والملاحظات: " + d.comment
+  );
+}
+
+document.getElementById("downloadBtn")
+.addEventListener("click",async () => {
   try {
-    const blob = await createImage();
+    download(await makeBlob());
+    statusEl.textContent =
+      "تم تجهيز صورة PNG بأبعاد 1000 × 1250.";
+  } catch(e) {
+    statusEl.textContent = e.message;
+  }
+});
+
+document.getElementById("shareBtn")
+.addEventListener("click",async () => {
+  try {
+    const blob = await makeBlob();
     const file = new File(
-      [blob],"Wonder-Library-Review.png",
+      [blob],
+      "Wonder-Library-Review.png",
       {type:"image/png"}
     );
 
-    if (navigator.canShare?.({files:[file]})) {
+    if(navigator.canShare?.({files:[file]})) {
       await navigator.share({
         files:[file],
-        title:"تقييم The Wonder Library"
+        title:"تقييم The Wonder Library",
+        text:"تجربتي مع مكتبة العجائب"
       });
+      statusEl.textContent = "تم فتح خيارات المشاركة.";
     } else {
-      downloadBlob(blob);
-      statusBox.textContent =
-        "تم تنزيل الصورة لمشاركتها يدويًا.";
+      download(blob);
+      statusEl.textContent =
+        "المشاركة المباشرة غير مدعومة؛ تم تنزيل الصورة.";
     }
-  } catch(err) {
-    if (err.name !== "AbortError") {
-      statusBox.textContent = err.message;
+  } catch(e) {
+    if(e.name !== "AbortError") {
+      statusEl.textContent = e.message;
     }
   }
-};
+});
 
-document.getElementById("whatsapp").onclick = async () => {
+document.getElementById("whatsappBtn")
+.addEventListener("click",async () => {
+  const url = "https://wa.me/"+phone+
+    "?text="+encodeURIComponent(message());
+
+  // فتح النافذة فور النقر لتقليل حظر النوافذ المنبثقة
+  const popup = window.open("about:blank","_blank");
+
   try {
-    const blob = await createImage();
-    downloadBlob(blob);
-
-    const rating = document.querySelector(
-      'input[name="rating"]:checked'
-    ).value;
-
-    const message = encodeURIComponent(
-      "تقييم The Wonder Library\n" +
-      "التقييم: " + rating + "/5\n" +
-      "سأرفق صورة التقييم في المحادثة."
+    const blob = await makeBlob();
+    const file = new File(
+      [blob],
+      "Wonder-Library-Review.png",
+      {type:"image/png"}
     );
 
-    window.open(
-      "https://wa.me/" + phone + "?text=" + message,
-      "_blank","noopener"
-    );
+    if(navigator.canShare?.({files:[file]})) {
+      if(popup) popup.close();
 
-    statusBox.textContent =
-      "أرفق الصورة التي تم تنزيلها داخل محادثة واتساب.";
-  } catch(err) {
-    statusBox.textContent = err.message;
+      try {
+        await navigator.share({
+          files:[file],
+          title:"تقييم The Wonder Library",
+          text:message()
+        });
+        statusEl.textContent =
+          "اختَر واتساب والمحادثة المطلوبة لإرسال الصورة.";
+      } catch(e) {
+        if(e.name === "AbortError") {
+          statusEl.textContent = "أُلغيت المشاركة.";
+          return;
+        }
+        download(blob);
+        window.open(url,"_blank","noopener");
+        statusEl.textContent =
+          "تم تنزيل الصورة؛ أرفقها يدويًا في واتساب.";
+      }
+      return;
+    }
+
+    download(blob);
+    if(popup) {
+      popup.location.href = url;
+    } else {
+      window.open(url,"_blank","noopener");
+    }
+    statusEl.textContent =
+      "تم تنزيل الصورة وفتح واتساب؛ أرفقها ثم اضغط إرسال.";
+
+  } catch(e) {
+    if(popup) popup.close();
+    statusEl.textContent =
+      "تعذر تجهيز الصورة: "+e.message;
   }
-};
+});
 </script>
 </body>
 </html>
